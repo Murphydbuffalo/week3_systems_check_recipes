@@ -1,4 +1,10 @@
-<h3> All Recipes </h3>
+<h3><a href="/recipes"> All Recipes </a></h3>
+
+<form action="/recipes" method="get">
+  <input type="text" name="search">
+  <input type="submit" value="Search by Name">
+</form>
+
 <p>
   <% if @page > 1 %>
     <a href="/recipes?page=<%= (@page - 1) %>"> Previous Page </a> | 
