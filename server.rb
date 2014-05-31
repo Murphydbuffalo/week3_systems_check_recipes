@@ -11,9 +11,9 @@ def access_db
   end
 end
 
-def get_recipes(page_offset, search)
+def get_recipes(page_offset)
   query = "SELECT name, description, id FROM recipes
-           WHERE name ILIKE '%#{search}%'
+           WHERE name ILIKE $1
            ORDER BY name LIMIT 10 OFFSET (10 * #{page_offset}) "
 end
 
@@ -28,8 +28,7 @@ end
 get '/recipes' do 
   params[:page].to_i == 0 ? @page = 1 : @page = params[:page].to_i 
   @page > 1 ? (page_offset = @page - 1) : (page_offset = 0)
-
-  @all_recipes = access_db {|conn| conn.exec(get_recipes(page_offset, params[:search])) }
+  @all_recipes = access_db {|conn| conn.exec_params(get_recipes(page_offset), ["%#{params[:search]}%"]) }
 
   erb :index
 end
