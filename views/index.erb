@@ -1,4 +1,10 @@
 <h3> All Recipes </h3>
+<p>
+  <% if @page > 1 %>
+    <a href="/recipes?page=<%= (@page - 1) %>"> Previous Page </a> | 
+  <% end %>
+  <a href="/recipes?page=<%= (@page + 1) %>"> Next Page </a>
+</p>
 
 <ul>
   <% @all_recipes.each do |recipe| %>

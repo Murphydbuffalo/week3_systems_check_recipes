@@ -11,8 +11,9 @@ def access_db
   end
 end
 
-def get_recipes
-  query = "SELECT name, description, id FROM recipes"
+def get_recipes(page_offset)
+  query = "SELECT name, description, id FROM recipes
+           ORDER BY name LIMIT 10 OFFSET (10 * #{page_offset}) "
 end
 
 def get_ingredients
@@ -24,7 +25,10 @@ def get_single_recipe
 end
 
 get '/recipes' do 
-  @all_recipes = access_db {|conn| conn.exec(get_recipes) }
+  params[:page].to_i == 0 ? @page = 1 : @page = params[:page].to_i 
+  @page > 1 ? (page_offset = @page - 1) : (page_offset = 0)
+  @all_recipes = access_db {|conn| conn.exec(get_recipes(page_offset)) }
+
   erb :index
 end
 
