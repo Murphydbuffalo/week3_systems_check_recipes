@@ -12,7 +12,7 @@ def access_db
 end
 
 def get_recipes_sql
-
+  query = "SELECT name, id FROM recipes"
 end
 
 def get_ingredients_sql
@@ -20,7 +20,7 @@ def get_ingredients_sql
 end
 
 get '/recipes' do 
-  @recipes = #connect to DB, select appropriate values
+  @recipes = access_db {|conn| conn.exec(get_recipes_sql) }
   erb :index
 end
 
@@ -31,7 +31,7 @@ end
 get '/recipes/:id' do 
   @recipe_id = params[:id] #use this to select the right ingredients
   @recipes = #connect to DB, select appropriate values
-  @ingredients = #connec to DB, select values matching recipe_id
+  @ingredients = #connect to DB, select values matching recipe_id
   erb :show
 end
 
