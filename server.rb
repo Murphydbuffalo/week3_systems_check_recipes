@@ -20,7 +20,7 @@ def get_ingredients
 end
 
 def get_single_recipe
-  query = "SELECT name, description FROM recipes WHERE id = #{params[:id]}"
+  query = "SELECT name, description, instructions FROM recipes WHERE id = #{params[:id]}"
 end
 
 get '/recipes' do 
@@ -33,7 +33,7 @@ get '/' do
 end
 
 get '/recipes/:id' do 
-  @single_recipe = access_db {|conn| conn.exec(get_single_recipe)}.first
+  @single_recipe = access_db {|conn| conn.exec(get_single_recipe)}.first #PG will always return an array of hashes, even if only one item (hash) is selected.
   @ingredients = access_db {|conn| conn.exec(get_ingredients) }
 
   erb :show

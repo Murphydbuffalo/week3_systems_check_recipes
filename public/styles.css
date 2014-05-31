@@ -1,0 +1,14 @@
+body {background: #D1D0D5 url("http://italianmasterchef.com/wp-content/uploads/2013/02/Rustic-background.jpg") center;
+      font: 1.2em calibri;
+      text-align: center;}
+
+a,
+a:visited {color: black;}
+
+a:hover {font-weight: bold;}
+
+ul {list-style-type: none;}
+
+ul li {padding: .75em;}
+
+

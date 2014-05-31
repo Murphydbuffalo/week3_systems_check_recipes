@@ -1,7 +1,11 @@
-<p><%= @single_recipe["name"] %></p>
+<h3><%= @single_recipe["name"] %></h3>
+<p class="home"><a href="/recipes"> Home </a></p>
+<p><%= @single_recipe["description"] %></p>
 
 <ul>
   <% @ingredients.each do |ingredient| %>
       <li><%= ingredient["name"] %></li>
   <% end %>
 </ul>
+
+<p><%= @single_recipe["instructions"] %></p>
